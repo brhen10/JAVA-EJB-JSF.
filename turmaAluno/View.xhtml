@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Dados dos Alunos"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTurmaAlunoLabel_idturmaAluno}"/>
+                    <h:outputText value="#{turmaAlunoController.selected.idturmaAluno}" title="#{bundle.ViewTurmaAlunoTitle_idturmaAluno}"/>
+                    <h:outputText value="#{bundle.ViewTurmaAlunoLabel_turma}"/>
+                    <h:outputText value="#{turmaAlunoController.selected.turma.nome}" title="#{bundle.ViewTurmaAlunoTitle_turma}"/>
+                    <h:outputText value="#{bundle.ViewTurmaAlunoLabel_aluno}"/>
+                    <h:outputText value="#{turmaAlunoController.selected.aluno.nome}" title="#{bundle.ViewTurmaAlunoTitle_aluno}"/>
+                </h:panelGrid>
+                 <br />
+                 <h:commandButton class="buttonDestroyNovo" action="#{turmaAlunoController.prepareCreate}" value="Adicionar Novo Aluno" />
+                 <br /> <br />
+                 <h:commandButton class="buttonDestroyView" action="#{turmaAlunoController.destroyAndView}" value="Excluir Aluno da Turma"/>
+                <br />
+                <br />
+                <h:button class="buttonDestroyEdit" outcome="Edit" value="Editar "/>
+                <br /><br />
+                
+                <h:commandButton class="buttonDestroyListarTodos" action="#{turmaAlunoController.prepareList}" value="Listar todos os Alunos"/>
+                <br />
+                <br />
+                <h:button class="button buttonDestroyInicio" outcome="/index" value="Voltar para o Início"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

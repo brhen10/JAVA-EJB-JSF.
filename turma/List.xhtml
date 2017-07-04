@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Turmas Cadastradas"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTurmaEmpty}" rendered="#{turmaController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{turmaController.items.rowCount > 0}">
+                    <h:outputText value="#{turmaController.pagination.pageFirstItem + 1}..#{turmaController.pagination.pageLastItem + 1}/#{turmaController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{turmaController.previous}" value="#{bundle.Previous} #{turmaController.pagination.pageSize}" rendered="#{turmaController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{turmaController.next}" value="#{bundle.Next} #{turmaController.pagination.pageSize}" rendered="#{turmaController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{turmaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTurmaTitle_idturma}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idturma}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTurmaTitle_nome}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nome}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTurmaTitle_curso}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.curso.nome}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value=""/>
+                            </f:facet>
+                            <h:commandButton class="buttonView" action="#{turmaController.prepareView}" value="Alunos Matriculados"/>
+                            <h:outputText value=""/>
+                            <h:commandButton class="buttonEdit" action="#{turmaController.prepareEdit}" value="Editar"/>
+                            <h:outputText value=""/>
+                            <h:commandButton class="buttonDestroy" action="#{turmaController.destroy}" value="Excluir"/>
+                            <h:outputText value=""/>
+                           </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandButton class="button1" action="#{turmaController.prepareCreate}" value="Cadastrar Nova Turma"/>
+                <br />
+                <br />
+               <h:button class="button2" outcome="/index" value="Voltar ao Início"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

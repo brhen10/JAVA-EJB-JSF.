@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Turmas Cadastradas"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTurmaLabel_idturma}"/>
+                    <h:outputText value="#{turmaController.selected.idturma}" title="#{bundle.ViewTurmaTitle_idturma}"/>
+                    <h:outputText value="#{bundle.ViewTurmaLabel_nome}"/>
+                    <h:outputText value="#{turmaController.selected.nome}" title="#{bundle.ViewTurmaTitle_nome}"/>
+                    <h:outputText value="#{bundle.ViewTurmaLabel_curso}"/>
+                    <h:outputText value="#{turmaController.selected.curso.nome}" title="#{bundle.ViewTurmaTitle_curso}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandButton class="buttonDestroyNovo" action="#{turmaController.prepareCreate}" value="Cadastrar Nova Turma" />
+                 <br /> <br />
+                 <h:commandButton class="buttonDestroyView" action="#{turmaController.destroyAndView}" value="Excluir Turma"/>
+                <br />
+                <br />
+                <h:button class="buttonDestroyEdit" outcome="Edit" value="Editar "/>
+                <br /><br />
+                
+                <h:commandButton class="buttonDestroyListarTodos" action="#{turmaController.prepareList}" value="Listar todas as turmas"/>
+                <br />
+                <br />
+                <h:button class="button buttonDestroyInicio" outcome="/index" value="Voltar para o Início"/>
+                <h1 align="center" >Relação de Alunos Matriculados</h1>
+                 <h:panelGroup>
+                    <h:outputText value="&nbsp;" />
+                    <h:dataTable class="linhasAlternadas" value="#{turmaController.listaAluno}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAlunoTitle_idaluno}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idaluno}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAlunoTitle_matricula}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.matricula}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAlunoTitle_nome}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nome}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAlunoTitle_dataNascimento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dataNascimento}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

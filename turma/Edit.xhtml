@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Editar Turma"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTurmaLabel_nome}" for="nome" />
+                    <h:inputText id="nome" value="#{turmaController.selected.nome}" title="#{bundle.EditTurmaTitle_nome}" required="true" requiredMessage="#{bundle.EditTurmaRequiredMessage_nome}"/>
+                    <h:outputLabel value="#{bundle.EditTurmaLabel_curso}" for="curso" />
+                   <h:selectOneMenu id="curso" value="#{turmaController.selected.curso}" title="#{bundle.EditTurmaTitle_curso}" required="true" requiredMessage="#{bundle.EditTurmaRequiredMessage_curso}">
+                       <f:selectItems value="#{cursoController.cursos}" var="c" itemLabel="#{c.nome}" itemValue="#{c}" />
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandButton class="buttonSalvar" action="#{turmaController.update}" value="Salvar"/>
+                <br />
+                <br />
+                <h:button class="buttonDestroyView" outcome="View" value="Listar Dados da Turma"/>
+                <br /><br />
+                <h:commandButton class="buttonDestroyListarTodos" action="#{turmaController.prepareList}" value="Listar todas as turmas" immediate="true"/>
+                <br />
+                <br />
+                <h:button class="button buttonDestroyInicio" outcome="/index" value="Início"/>       
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

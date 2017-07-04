@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Adicionar Nova Turma"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTurmaLabel_nome}" for="nome" />
+                    <h:inputText id="nome" value="#{turmaController.selected.nome}" title="#{bundle.CreateTurmaTitle_nome}" required="true" requiredMessage="#{bundle.CreateTurmaRequiredMessage_nome}"/>
+                    <h:outputLabel value="#{bundle.CreateTurmaLabel_curso}" for="curso" />
+                    <h:selectOneMenu id="curso" value="#{turmaController.selected.curso}" title="#{bundle.CreateTurmaTitle_curso}" required="true" requiredMessage="#{bundle.CreateTurmaRequiredMessage_curso}">
+                        <f:selectItems value="#{cursoController.cursos}" var="c" itemLabel="#{c.nome}" itemValue="#{c}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandButton class="buttonSalvar" action="#{turmaController.create}" value="Salvar" />
+                <br />
+                <br />
+                <h:commandButton class="buttonDestroyListarTodos" action="#{turmaController.prepareList}" value="listar todas as turmas" immediate="true"/>
+                <br />
+                <br />
+                <h:button class="button buttonDestroyInicio" outcome="/index" value="Início"/>
+          </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
